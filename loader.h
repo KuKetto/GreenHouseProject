@@ -22,7 +22,7 @@ private:
             virtual const char* what() const throw() {
                 return errorMsg.c_str();
             }
-        };
+    };
 };
 
 #endif // LOADER_H

@@ -4,7 +4,7 @@
 #include "sensordata.h"
 
 class IMonitor {
-    SensorData getSensorData(std::string& ghId);
+    virtual SensorData getSensorData(std::string& ghId) = 0;
 };
 
 #endif // IMONITOR_H

@@ -9,7 +9,18 @@
 class Monitor
 {
 public:
-    SensorData getSensorData(std::string& ghId)
+    SensorData getSensorData(std::string& ghId);
+private:
+    rapidjson::Document getGreenHouseJson(const std::string& stringifiedJson);
+    class parseErrorException : private std::exception {
+        private:
+            std::string errorMsg;
+        public:
+            parseErrorException(const std::string& errorMsg) : errorMsg(errorMsg) {};
+            virtual const char* what() const throw() {
+                return errorMsg.c_str();
+            }
+    };
 };
 
 #endif // MONITOR_H
