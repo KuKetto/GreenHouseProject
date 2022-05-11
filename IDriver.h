@@ -6,7 +6,7 @@
 
 class IDriver {
 public:
-    virtual int sendCommand(Greenhouse& gh, const std::string& token, const double& boilerValue, const double& sprinklerValue) = 0;
+    virtual int sendCommand(const Greenhouse& gh, const std::string& token, const double& boilerValue, const double& sprinklerValue) = 0;
 };
 
 #endif // IDRIVER_H

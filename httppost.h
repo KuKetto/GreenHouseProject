@@ -9,7 +9,7 @@ class HTTPPost : public QObject, public HTTPInterface
     Q_OBJECT
 public:
     explicit HTTPPost(QObject *parent = nullptr);
-    QString method(const std::string& uri, const std::string& contentType, const QByteArray requestBody = nullptr);
+    QString method(const std::string& uri, const std::string& contentType = std::string(), const QByteArray requestBody = QByteArray());
 private slots:
     void readyRead();
 private:

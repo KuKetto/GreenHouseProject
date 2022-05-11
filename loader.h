@@ -11,7 +11,7 @@ class Loader : public ILoader
 public:
     GreenHouseList loadGreenHouses();
 private:
-    rapidjson::Document getGreenHouseListJson(const std::string& stringifiedJson);
+    rapidjson::Document getGreenHouseListJson(const QString& stringifiedJson);
     Greenhouse fetchGreenhouseFromJson(rapidjson::Value& greenHouseJsonObject);
     //parse exception
     class parseErrorException : private std::exception {

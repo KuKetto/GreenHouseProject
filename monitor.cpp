@@ -1,6 +1,6 @@
 #include "monitor.h"
 
-SensorData Monitor::getSensorData(std::string &ghId)
+SensorData Monitor::getSensorData(const std::string &ghId)
 {
     HTTPGet get;
     std::string stringifiedJson = get.method("http://193.6.19.58:8181/greenhouse/" + ghId).toStdString();

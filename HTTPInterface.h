@@ -9,7 +9,7 @@
 #include <QEventLoop>
 
 class HTTPInterface {
-    virtual QString method(const std::string& uri, const std::string& contentType = nullptr, const QByteArray requestBody = nullptr) = 0;
+    virtual QString method(const std::string& uri, const std::string& contentType = std::string(), const QByteArray requestBody = QByteArray()) = 0;
 };
 
 #endif // HTTPINTERFACE_H

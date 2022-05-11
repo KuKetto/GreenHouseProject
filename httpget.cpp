@@ -17,7 +17,6 @@ QString HTTPGet::method(const std::string &uri, const std::string &contentType, 
     loop.exec();
     reply->deleteLater();
     QString dataReply(data);
-    qInfo() << data;
     return dataReply;
 }
 

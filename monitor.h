@@ -9,7 +9,7 @@
 class Monitor
 {
 public:
-    SensorData getSensorData(std::string& ghId);
+    SensorData getSensorData(const std::string& ghId);
 private:
     rapidjson::Document getGreenHouseJson(const std::string& stringifiedJson);
     class parseErrorException : private std::exception {

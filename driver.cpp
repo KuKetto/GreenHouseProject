@@ -1,18 +1,18 @@
 #include "driver.h"
 
-int Driver::sendCommand(Greenhouse &gh, const std::string &token, const double &boilerValue, const double &sprinklerValue)
+int Driver::sendCommand(const Greenhouse &gh, const std::string &token, const double &boilerValue, const double &sprinklerValue)
 {
     std::string jsonRequestString = stringifyJSON(mapData(
        gh.getGhId(),
-       "bup" + std::to_string(boilerValue) + "c",
-       "son" + std::to_string(sprinklerValue) + "l"
+       boilerValue == 0 ? "" : "bup" + std::to_string((int)floor(boilerValue)) + "c",
+       sprinklerValue == 0 ? "" : "son" + std::to_string((int)floor(sprinklerValue)) + "l"
     ));
 
     HTTPPost post;
     return post.method("http://193.6.19.58:8181/greenhouse/" + token, "text/plain", QByteArray::fromStdString(jsonRequestString)).toInt();
 }
 
-rapidjson::Document mapData(const std::string& ghId, const std::string& boilerCommand, const std::string& sprinklerCommand)
+rapidjson::Document Driver::mapData(const std::string& ghId, const std::string& boilerCommand, const std::string& sprinklerCommand)
 {
     using namespace rapidjson;
 

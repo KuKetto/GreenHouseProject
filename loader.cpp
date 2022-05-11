@@ -5,7 +5,8 @@ GreenHouseList Loader::loadGreenHouses()
     std::vector<Greenhouse> greenHouseList;
 
     HTTPGet get;
-    std::string stringifiedJson = get.method("http://193.6.19.58:8181/greenhouse").toStdString();
+
+    QString stringifiedJson = get.method("http://193.6.19.58:8181/greenhouse");
     rapidjson::Document parsedJson = getGreenHouseListJson(stringifiedJson);
 
     for (unsigned int i = 0; i < parsedJson["greenhouseList"].Size(); i++) {
@@ -19,12 +20,14 @@ GreenHouseList Loader::loadGreenHouses()
     return GHL;
 }
 
-rapidjson::Document Loader::getGreenHouseListJson(const std::string& stringifiedJson)
+rapidjson::Document Loader::getGreenHouseListJson(const QString& stringifiedJson)
 {
     using namespace rapidjson;
 
+    QByteArray JSON = stringifiedJson.toLocal8Bit();
+
     Document doc;
-    ParseResult parseResult = doc.Parse(stringifiedJson.c_str());
+    ParseResult parseResult = doc.Parse(JSON.data());
 
     if (!parseResult) { //check parse errors
       throw parseErrorException(GetParseError_En(parseResult.Code()));

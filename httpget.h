@@ -9,7 +9,7 @@ class HTTPGet : public QObject, public HTTPInterface
     Q_OBJECT
 public:
     explicit HTTPGet(QObject *parent = nullptr);
-    QString method(const std::string& uri, const std::string& contentType = nullptr, const QByteArray requestBody = nullptr);
+    QString method(const std::string& uri, const std::string& contentType = std::string(), const QByteArray requestBody = QByteArray());
 private slots:
     void readyRead();
 private:
