@@ -2,10 +2,15 @@
 
 int Driver::sendCommand(const Greenhouse &gh, const std::string &token, const double &boilerValue, const double &sprinklerValue)
 {
-    std::string jsonRequestString = stringifyJSON(mapData(
+    std::string jsonRequestString = boilerValue == 0 && sprinklerValue == 0 ?
+    stringifyJSON(mapData(
        gh.getGhId(),
-       boilerValue == 0 ? "" : "bup" + std::to_string((int)floor(boilerValue)) + "c",
-       sprinklerValue == 0 ? "" : "son" + std::to_string((int)floor(sprinklerValue)) + "l"
+       "",
+       ""
+    )) : stringifyJSON(mapData(
+       gh.getGhId(),
+       "bup" + std::to_string((int)round(boilerValue)) + "c",
+       "son" + std::to_string((int)round(sprinklerValue)) + "l"
     ));
 
     HTTPPost post;

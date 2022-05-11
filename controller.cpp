@@ -122,15 +122,27 @@ void Controller::checkForDeviceError(const Greenhouse &gh, const SensorData &sD)
     //check for boiler error
     if (gh.getTemperature_min() - sD.getTemperature_act() >= 5) {
         //temperature too low
+        logger.log(gh.getGhId(), sD.getToken(), "A hőmérséklet vészesen alacsony! Az elvárt "
+                    + std::to_string(gh.getTemperature_min()) + " celsius fokhoz képest csak "
+                    + std::to_string(round(sD.getTemperature_act())) + " celsius fok van");
     } else if (sD.getTemperature_act() - gh.getTemperature_opt() >= 5) {
-        //temperature too low
+        //temperature too high
+        logger.log(gh.getGhId(), sD.getToken(), "A hőmérséklet vészesen magas! A hőmérséklet bőven az optimális "
+                    + std::to_string(gh.getTemperature_opt()) + " celsius fok felett van, jelenleg "
+                    + std::to_string(sD.getTemperature_act()) + " celsius fok");
     }
 
     //check for sprinkler error
     if (gh.getHumidity_min() - sD.getHumidity_act() >= 20) {
         //hummidity too low
+        logger.log(gh.getGhId(), sD.getToken(), "A páratartalom vészesen alacsony! Az elvárt "
+                    + std::to_string(gh.getHumidity_min()) + "% helyett mindössze csak"
+                    + std::to_string(sD.getHumidity_act()) + "%-os páratartalmú a levegő");
     } else if (sD.getHumidity_act() - gh.getHumidity_min() >= 20) {
         //hummidty too high
+        logger.log(gh.getGhId(), sD.getToken(), "A páratartalom vészesen magas! Az elvárt "
+                    + std::to_string(gh.getHumidity_min()) + "%-ot bőven meghaladja, jelenleg "
+                    + std::to_string(sD.getHumidity_act()) + "%-os páratartalmú a levegő");
     }
 
     //if toLogMessage not empty call log function else do nothing

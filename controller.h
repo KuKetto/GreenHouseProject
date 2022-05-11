@@ -4,6 +4,7 @@
 #include "loader.h"
 #include "driver.h"
 #include "monitor.h"
+#include "logger.h"
 #include <map>
 #include <algorithm>
 #include <cmath>
@@ -33,6 +34,7 @@ private:
     Loader greenHouseListInitailizer;
     Monitor greenHouseCurrentState;
     Driver greenHouseCommandSystem;
+    Logger logger;
 
 
     //controller ptivate functions

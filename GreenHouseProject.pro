@@ -16,6 +16,7 @@ SOURCES += \
     httpget.cpp \
     httppost.cpp \
     loader.cpp \
+    logger.cpp \
     main.cpp \
     mainwindow.cpp \
     monitor.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     IDriver.h \
     ILoader.h \
     IMonitor.h \
+    LoggerInterface.h \
     controller.h \
     driver.h \
     greenhouse.h \
@@ -33,6 +35,7 @@ HEADERS += \
     httpget.h \
     httppost.h \
     loader.h \
+    logger.h \
     mainwindow.h \
     monitor.h \
     sensordata.h
