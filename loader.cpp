@@ -6,6 +6,9 @@ GreenHouseList Loader::loadGreenHouses()
 
     HTTPGet get;
 
+    //for testing purposes only!
+    //QString stringifiedJson = get.method("http://saydo.me/greenhouses.json");
+
     QString stringifiedJson = get.method("http://193.6.19.58:8181/greenhouse");
     rapidjson::Document parsedJson = getGreenHouseListJson(stringifiedJson);
 

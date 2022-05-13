@@ -12,12 +12,13 @@ std::vector<Controller::resultStruct> Controller::execute()
 
     for (auto& greenHouse : greenHouseList.getGreenhouseList()) {
         try {
-            std::pair<std::string, std::pair<double, double>> commands = defineGreenHouseJob(greenHouse);
+            std::pair<std::string, std::pair<double, double>> commands = defineGreenHouseJob(greenHouse); 
             int response =
                   greenHouseCommandSystem.sendCommand(greenHouse, commands.first, commands.second.first, commands.second.second);
             resultVector.push_back(makeResultStruct(response, greenHouse.getDescription(), greenHouse.getGhId(),
                                                     commands.first, commands.second.first, commands.second.second));
         }  catch (std::exception &ex) {
+            qInfo() << ex.what();
             resultVector.push_back(makeResultStruct(0, greenHouse.getDescription(), ex.what(),
                                                     "-", 0, 0));
         }
@@ -136,13 +137,13 @@ void Controller::checkForDeviceError(const Greenhouse &gh, const SensorData &sD)
     if (gh.getHumidity_min() - sD.getHumidity_act() >= 20) {
         //hummidity too low
         logger.log(gh.getGhId(), sD.getToken(), "A páratartalom vészesen alacsony! Az elvárt "
-                    + std::to_string(gh.getHumidity_min()) + "% helyett mindössze csak"
-                    + std::to_string(sD.getHumidity_act()) + "%-os páratartalmú a levegő");
+                    + std::to_string(gh.getHumidity_min()) + "% helyett mindössze csak "
+                    + std::to_string((int)round(sD.getHumidity_act())) + "%-os páratartalmú a levegő");
     } else if (sD.getHumidity_act() - gh.getHumidity_min() >= 20) {
         //hummidty too high
         logger.log(gh.getGhId(), sD.getToken(), "A páratartalom vészesen magas! Az elvárt "
                     + std::to_string(gh.getHumidity_min()) + "%-ot bőven meghaladja, jelenleg "
-                    + std::to_string(sD.getHumidity_act()) + "%-os páratartalmú a levegő");
+                    + std::to_string((int)round(sD.getHumidity_act())) + "%-os páratartalmú a levegő");
     }
 
     //if toLogMessage not empty call log function else do nothing

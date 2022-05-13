@@ -14,6 +14,13 @@ int Driver::sendCommand(const Greenhouse &gh, const std::string &token, const do
     ));
 
     HTTPPost post;
+
+    //for testing purposes only!
+//    std::string commands = boilerValue == 0 && sprinklerValue == 0 ? "{empty string} - sprinkler command: {empty string}"
+//                : "bup" + std::to_string((int)round(boilerValue)) + "c - sprinkler command: " + "son" + std::to_string((int)round(sprinklerValue)) + "l";
+//    qInfo() << QString::fromStdString("ghID: " + gh.getGhId() + " - token: " + token + "\nboiler command: " + commands);
+//    return 0;
+
     return post.method("http://193.6.19.58:8181/greenhouse/" + token, "text/plain", QByteArray::fromStdString(jsonRequestString)).toInt();
 }
 

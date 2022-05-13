@@ -3,6 +3,10 @@
 SensorData Monitor::getSensorData(const std::string &ghId)
 {
     HTTPGet get;
+
+    //for testing purposes only!
+    //std::string stringifiedJson = get.method("https://saydo.me/" + ghId + ".json").toStdString();
+
     std::string stringifiedJson = get.method("http://193.6.19.58:8181/greenhouse/" + ghId).toStdString();
     rapidjson::Document parsedJson = getGreenHouseJson(stringifiedJson);
 

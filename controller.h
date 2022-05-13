@@ -47,12 +47,12 @@ private:
 
 
     //exception handling
-    class NoHumidityForTemperature : private std::exception {
+    class NoHumidityForTemperature : public std::exception {
         private:
             bool temp_toLow;
         public:
             NoHumidityForTemperature(const bool& temp_toLow) : temp_toLow(temp_toLow) {};
-            virtual const char* what() const throw() {
+            virtual const char * what() const noexcept {
                 return temp_toLow ? "Az adott hőmérséklet túl alacsony, nincs hozzá páratartalmi adat"
                                   : "Az adott hőmérséklet túl magas, nincs hozzá páratartalmi adat";
             }
